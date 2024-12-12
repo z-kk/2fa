@@ -1,7 +1,34 @@
-# This is just an example to get you started. A typical hybrid package
-# uses this file as the main entry point of the application.
+import
+  std / [strutils, rdstdin],
+  docopt,
+  tfapkg / [submodule, nimbleInfo]
 
-import tfapkg/submodule
+var
+  target* = ""
+
+proc readCmdOpt() =
+  ## Read command line options.
+  let doc = """
+    $1
+
+    Usage:
+      $1 <target>
+
+    Options:
+      -h --help   Show this screen.
+      --version   Show version.
+      <target>    Target title.
+  """ % [AppName]
+  let args = doc.dedent.docopt(version = Version)
+
+  target = $args["<target>"]
 
 when isMainModule:
-  echo(getWelcomeMessage())
+  readCmdOpt()
+  initial()
+  var key = target.getKey
+  if key == "":
+    key = readLineFromStdin("TOTP key: ")
+    target.setKey(key)
+  else:
+    echo key.getTotpValue

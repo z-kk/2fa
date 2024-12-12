@@ -5,3 +5,5 @@ htmldocs/
 bin/
 tests/*
 !tests/*.nim*
+
+data/

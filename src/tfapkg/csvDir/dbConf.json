@@ -1,0 +1,6 @@
+{
+  "dbType": 2,
+  "dbHost": "maria",
+  "dbUser": "tfauser",
+  "dbName": "tfa"
+}

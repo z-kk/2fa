@@ -1,0 +1,3 @@
+name,comment,data_type,length,default_val,not_null,is_primary
+title,title,varchar,255,,1,1
+value,hashed value,varchar,255,,1,
