@@ -12,6 +12,13 @@ proc initial*() =
   dbPass = readPasswordFromStdin()
   createTables(password=dbPass)
 
+proc getTitleList*(): seq[string] =
+  let db = openDb(password=dbPass)
+  defer: db.close
+
+  for row in db.selectTfaValuesTable:
+    result.add row.title
+
 proc getKey*(title: string): string =
   let db = openDb(password=dbPass)
   defer: db.close
